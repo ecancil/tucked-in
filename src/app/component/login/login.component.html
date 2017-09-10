@@ -1,0 +1,8 @@
+<button *ngIf="!model.user" (click)="login($event)" md-raised-button color="primary">Login</button>
+
+<div *ngIf="model.user">
+	<div> {{ model?.user?.displayName }} </div>
+	<div> {{ model?.user?.email }} </div>
+	<div> <img bind-src="model?.user?.photoURL"/> </div>
+	<div> {{ model?.user?.uid}} </div>
+</div>

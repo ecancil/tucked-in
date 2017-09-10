@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body{
+	height: 100VH;
+	-webkit-print-color-adjust: exact;
+	background: #20002c; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to bottom, #20002c, #66586f) !important; /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to bottom, #20002c, #66586f) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
