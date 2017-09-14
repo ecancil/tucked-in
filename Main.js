@@ -11,7 +11,9 @@ function createWindow() {
 	// Show dev tools
 	// Remove this line before distributing
 	win.webContents.openDevTools()
-	win.webContents.on('new-window', handleNewWindow);
+	//win.webContents.on('did-get-redirect-request', handleNewWindow);
+	win.webContents.on('did-navigate', handleNewWindow);
+	win.webContents.on('will-navigate', handleNewWindow);
 	// Remove window once app is closed
 	win.on('closed', function () {
 		win = null;
@@ -32,36 +34,29 @@ app.on('window-all-closed', function () {
 	}
 });
 
+function willNav(e, url, frameName, disposition, options)
+{
+	console.log(url)
+	if(url.indexOf('https://accounts.google.com') > -1){
+		e.preventDefault();
+		win.loadURL(url);
+	}
+	return;
+		if (url.indexOf('localhost:4200') > -1)	{
+			//e.preventDefault();
+			win.loadURL("localhost:4200" + '?login=true');
+		}
 
+}
 
 function handleNewWindow(e, url, frameName, disposition, options)
 {
 
 	// Catch OAuth opening a new window and attach callbacks to close it and redirect the main
 	// window after it has logged in
-
+		console.log("==============")
 		console.log(url);
-	if (url.indexOf('https://accounts.google.com') === 0)
-	{
-		console.log("========")
-		options.titleBarStyle = 'default';
-		var authWindow = new BrowserWindow(options);
+		console.log("\n\n\n\n\n")
+		//e.stopImmediatePropagation();
 
-		authWindow.webContents.on('did-navigate', function (e, navURL)
-		{
-			if (navURL.indexOf(appDomain) === 0)
-			{
-				setTimeout(function ()
-				{
-					authWindow.close();
-
-					mainWindow.loadURL(appURL + '&login=true');
-				}, 0);
-			}
-		});
-
-		authWindow.loadURL(url);
-
-		e.preventDefault();
-	}
 }

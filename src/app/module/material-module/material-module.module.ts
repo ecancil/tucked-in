@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import {MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdNativeDateModule} from '@angular/material';
+import {
+	MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdNativeDateModule,
+	MdToolbarModule, MdExpansionModule, MdFormFieldModule, MdInputModule
+} from '@angular/material';
 
 @NgModule({
   imports: [
-    CommonModule, MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdNativeDateModule
+    CommonModule, MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdNativeDateModule, MdToolbarModule, MdExpansionModule, MdFormFieldModule, MdInputModule
   ],
   exports: [
-    CommonModule, MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdNativeDateModule
+    CommonModule, MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdNativeDateModule, MdToolbarModule, MdExpansionModule, MdFormFieldModule, MdInputModule
   ],
   declarations: []
 })

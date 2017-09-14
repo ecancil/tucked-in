@@ -11,8 +11,6 @@ export enum SystemEventTypes{
 @Injectable()
 export class EventHubService extends Subject<any> {
 
-	r = Math.random();
-
 	constructor() { super() }
 
 	loggedIn(){

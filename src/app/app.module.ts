@@ -8,6 +8,7 @@ import { AngularFireModule } from 'angularfire2'
 
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBBuWdjZiWS7F1tWEDa6UVaGb0etO7M3Rw",
@@ -20,27 +21,30 @@ export const firebaseConfig = {
 //components
 import { AppComponent } from './app.component';
 
- import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+ import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginComponent } from './component/login/login.component';
 import {AuthModel} from "./model/AuthModel";
 import {EventHubService} from "./manager/eventHub/event-hub.service";
 import {BookModel} from "./model/BookModel";
+import { Collapse } from './directive/animation-directives.directive';
 
 console.log(AuthModel);
 
 @NgModule({
   declarations: [
 				LoginComponent,
-    AppComponent
+    AppComponent,
+				Collapse
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
+				NoopAnimationsModule,
     HttpModule,
     MaterialModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+			 FlexLayoutModule
   ],
   providers: [Services, AuthModel, EventHubService, BookModel],
   bootstrap: [AppComponent]

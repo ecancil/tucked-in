@@ -25,20 +25,31 @@ export class Services implements IService{
     this.service = new ServiceImpl(http);
   }
 
+  createUser(email, password){
+  		this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(result => {
+
+				},
+				error => {
+
+				})
+		}
+
   login(){
     //this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    var provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('profile');
+    var provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope('public_profile');
     provider.addScope('email');
-    this.afAuth.auth.signInWithPopup(provider).then(result => {
+    provider.addScope('user_photos');
+    this.afAuth.auth.signInWithRedirect(provider).then(result => {
+    	console.log(result);
 						this.ngZone.run(() => {
 							this.authModel.accessToken = result.credential.accessToken;
 							this.authModel.user = result.user;
-							console.log(this.hub.r);
 							this.hub.loggedIn();
 						});
     },
       error =>{
+    	console.log(error);
     });
   }
 

@@ -4,8 +4,6 @@ import {Services} from "../../service/Services";
 import {EventHubService} from "../../manager/eventHub/event-hub.service";
 import {BaseComponent} from '../BaseComponent'
 
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,9 +15,17 @@ export class LoginComponent extends BaseComponent implements OnInit{
   		super(theHub);
   }
 
+
+  isLoggingIn = false;
   login(){
+			this.isLoggingIn = true;
     this.services.login();
   }
+
+  isSigningUp = false;
+		signup(){
+			this.isSigningUp = true;
+		}
 
   loggedIn(){
   		this.services.getAllBooks();

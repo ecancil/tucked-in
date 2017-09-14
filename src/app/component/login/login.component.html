@@ -1,8 +1,53 @@
-<button *ngIf="!model.user" (click)="login($event)" md-raised-button color="primary">Login</button>
+<!--
 
-<div *ngIf="model.user">
-	<div> {{ model?.user?.displayName }} </div>
-	<div> {{ model?.user?.email }} </div>
-	<div> <img bind-src="model?.user?.photoURL"/> </div>
-	<div> {{ model?.user?.uid}} </div>
+<div fxLayout="column" fxLayoutAlign="center" style="height: 100VH">
+	<div *ngIf="model.user == null">
+		<button (click)="login($event)" md-raised-button color="primary">Login</button>
+	</div>
+	<div *ngIf="model.user">
+		<div> <img bind-src="model?.user?.photoURL"/> </div>
+		<div> {{ model?.user?.displayName }} </div>
+		<div> {{ model?.user?.email }} </div>
+		<div> {{ model?.user?.uid}} </div>
+	</div>
+</div>
+
+-->
+<!--
+<div fxLayout="row" fxLayoutAlign="center" fxFill style="height: 100VH;" >
+	<md-expansion-panel hideToggle="true" fxFlex="40">
+		<md-expansion-panel-header>
+			<md-panel-description>
+				<div enabled="false" *ngIf="!isLoggingIn && !isSigningUp" fxFlexAlign="center" fxFlexFill>
+					<button md-raised-button color="primary">Login</button>
+					<button (click)="signup($event)" md-raised-button color="primary">Sign Up</button>
+				</div>
+				<div [hidden]="!isSigningUp" fxFlexAlign="center" fxFlexFill>Sign Up</div>
+			</md-panel-description>
+		</md-expansion-panel-header>
+		<form style="background-color: blue">
+				<div>
+						<md-form-field>
+							<input ngmodel="email" mdInput placeholder="Email" type="email" id="contactemail" email>
+						</md-form-field>
+						<md-form-field>
+							<input mdInput placeholder="Password" type="password" required>
+						</md-form-field>
+				</div>
+				<div style="background-color: red">
+					<button enabled="" md-raised-button color="primary" fxFlexAlign="right">Create Account</button>
+				</div>
+		</form>
+	</md-expansion-panel>
+</div>
+-->
+
+<div fxLayout="column" fxLayoutGap="10px">
+	<div >
+		<button (click)="sandwich = !sandwich" enabled="" md-raised-button color="primary">Create Account</button>
+	</div>
+	<div>
+		<button [collapse]="sandwich" enabled="" md-raised-button color="primary">Create Account</button>
+	</div>
+	<img  src="http://www.nutsack.com/imsq/squirrel.jpg">
 </div>
