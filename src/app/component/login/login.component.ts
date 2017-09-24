@@ -3,6 +3,8 @@ import {AuthModel} from "../../model/AuthModel";
 import {Services} from "../../service/Services";
 import {EventHubService} from "../../manager/eventHub/event-hub.service";
 import {BaseComponent} from '../BaseComponent'
+import {Validators, FormControl} from "@angular/forms";
+import {EMAIL_VALIDATOR} from "@angular/forms/src/directives/validators";
 
 @Component({
   selector: 'app-login',
@@ -11,10 +13,9 @@ import {BaseComponent} from '../BaseComponent'
 })
 export class LoginComponent extends BaseComponent implements OnInit{
 
-  constructor(public model:AuthModel, public services:Services, private theHub: EventHubService) {
+  constructor(public authModel:AuthModel, public services:Services, private theHub: EventHubService) {
   		super(theHub);
   }
-
 
   isLoggingIn = false;
   login(){
@@ -22,16 +23,48 @@ export class LoginComponent extends BaseComponent implements OnInit{
     this.services.login();
   }
 
-  isSigningUp = false;
-		signup(){
-			this.isSigningUp = true;
-		}
+  isRegistering = false;
+   register(){
+      this.services.createUser(this.authModel.signupEmail, this.authModel.signupPasswordVerification)
+      this.isRegistering = true;
+      this.registrationError = null;
+   }
 
-  loggedIn(){
-  		this.services.getAllBooks();
-		}
+   isLoggedIn = false;
+  loggedIn(message?:any){
+     this.isLoggedIn = true;
+      //this.services.getAllBooks();
+   }
+
+   registered(message?:any){
+      this.isRegistering = false;
+   }
+
+   registrationError:String;
+   registrationFailed(message?:any){
+      this.isRegistering = false;
+      this.registrationError = message;
+   }
 
   ngOnInit() {
   }
+
+
+   emailFormControl = new FormControl('', [
+      Validators.required,
+      Validators.email
+   ]);
+
+   passwordFormControl = new FormControl('', [
+      Validators.required,
+      Validators.min(6)
+   ]);
+
+   passwordVerificationFormControl = new FormControl('', [
+      Validators.required,
+      Validators.min(6)
+   ]);
+
+
 
 }

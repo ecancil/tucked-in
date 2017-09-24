@@ -14,6 +14,7 @@ import {AuthModel} from "../model/AuthModel";
 import {EventHubService} from "../manager/eventHub/event-hub.service";
 import { AngularFireDatabase } from 'angularfire2/database';
 import {BookModel} from "../model/BookModel";
+import {Observable} from "rxjs";
 
 
 @Injectable()
@@ -26,45 +27,50 @@ export class Services implements IService{
   }
 
   createUser(email, password){
-  		this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(result => {
+     setTimeout(()=> {
+        this.afAuth.auth.createUserWithEmailAndPassword(email, password).then(result => {
+              this.authModel.currentUser = firebase.auth().currentUser;
+              this.hub.registered();
+              this.hub.loggedIn();
+           },
+           (error: any) => {
+              this.hub.registrationFailed(error.message);
+           })
+     }, 2000);
+   }
 
-				},
-				error => {
 
-				})
-		}
 
   login(){
-    //this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     var provider = new firebase.auth.FacebookAuthProvider();
     provider.addScope('public_profile');
     provider.addScope('email');
     provider.addScope('user_photos');
     this.afAuth.auth.signInWithRedirect(provider).then(result => {
-    	console.log(result);
-						this.ngZone.run(() => {
-							this.authModel.accessToken = result.credential.accessToken;
-							this.authModel.user = result.user;
-							this.hub.loggedIn();
-						});
+      console.log(result);
+      this.ngZone.run(() => {
+         this.authModel.accessToken = result.credential.accessToken;
+         this.authModel.user = result.user;
+         this.hub.loggedIn();
+      });
     },
       error =>{
-    	console.log(error);
+      console.log(error);
     });
   }
 
 
 
   getAllBooks(){
-				this.bookModel.books = this.fb.list("/books");
-				this.bookModel.books.subscribe(val => this.hub.booksUpdated());
-		}
+      this.bookModel.books = this.fb.list("/books");
+      this.bookModel.books.subscribe(val => this.hub.booksUpdated());
+   }
 
-		getBookByID(id:string){
+   getBookByID(id:string){
 
-		}
+   }
 
-  callService(endpoint:string, httpMethod:HTTPMethod, payload?:any):Promise<any>{
+  callService(endpoint:string, httpMethod:HTTPMethod, payload?:any):any{
     return this.service.callService(endpoint, httpMethod, payload);
   }
 }

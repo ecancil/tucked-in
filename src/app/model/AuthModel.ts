@@ -3,6 +3,13 @@
  */
 export class AuthModel{
 
-  public user: any;
-  public accessToken: String;
+   public signupEmail: String;
+   public signupPassword: String;
+   public signupPasswordVerification: String ;
+
+
+   public currentUser:any;
+
+   public user: any;
+   public accessToken: String;
 }

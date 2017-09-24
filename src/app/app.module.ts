@@ -21,7 +21,7 @@ export const firebaseConfig = {
 //components
 import { AppComponent } from './app.component';
 
- import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { LoginComponent } from './component/login/login.component';
 import {AuthModel} from "./model/AuthModel";
 import {EventHubService} from "./manager/eventHub/event-hub.service";
@@ -38,7 +38,7 @@ console.log(AuthModel);
   ],
   imports: [
     BrowserModule,
-				NoopAnimationsModule,
+    BrowserAnimationsModule,
     HttpModule,
     MaterialModule,
     AngularFireModule.initializeApp(firebaseConfig),
