@@ -1,0 +1,13 @@
+<div fxFlexFill>
+   <form fxFlexFill >
+      <md-form-field fxFlexFill>
+         <input (keyup)="services.searchGiphy(giphySearcher.value)" type="text" placeholder="Pick one" aria-label="Number" mdInput [formControl]="giphySearcher" [mdAutocomplete]="auto">
+         <md-hint align="start"><strong>Must have at least three characters.</strong> </md-hint>
+         <md-autocomplete #auto="mdAutocomplete">
+            <md-option *ngFor="let item of giphyModel.getGiphyResult(giphySearcher.value)" [value]="item" style="height: 120px;" fxLayoutAlign="center center">
+               <img height="100" [src]="item.images.fixed_height_small.url"/>
+            </md-option>
+         </md-autocomplete>
+      </md-form-field>
+   </form>
+</div>

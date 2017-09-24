@@ -3,13 +3,15 @@
  */
 export class AuthModel{
 
-   public signupEmail: String;
-   public signupPassword: String;
-   public signupPasswordVerification: String ;
+   public signupEmail: string = Math.random() + "@gmail.com";
+   public signupPassword: string = "Ec@ncil111";
+   public signupPasswordVerification: string = "Ec@ncil111";
 
+
+   public accountUserNameUpdate: string;
 
    public currentUser:any;
 
    public user: any;
-   public accessToken: String;
+   public accessToken: string;
 }

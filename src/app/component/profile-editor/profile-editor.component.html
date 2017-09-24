@@ -1,0 +1,9 @@
+<form fxFlexFill *ngIf="!isLoggedIn" fxLayout="column" [hidden]="isSigningUp" fxLayoutAlign="center center">
+   <md-form-field fxFlexFill>
+      <input mdInput placeholder="Username" required="true" [formControl]="usernameFormField" [(ngModel)]="authModel.accountUserNameUpdate">
+      <md-hint align="start"><strong>This username will display to your watchers.</strong> </md-hint>
+      <md-icon mdSuffix>person pin</md-icon>
+   </md-form-field>
+
+   <app-giphy-searcher fxFlexFill></app-giphy-searcher>
+</form>

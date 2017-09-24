@@ -1,7 +1,7 @@
 import {Directive, HostListener, HostBinding, ElementRef, Renderer2, Input, OnChanges, DoCheck, ViewChild} from '@angular/core';
 import {AnimationBuilder, style, animate, state, transition} from "@angular/animations";
 
-const EXPANSION_PANEL_ANIMATION_TIMING = '300ms cubic-bezier(0.4,0.0,0.2,1)';
+const EXPANSION_PANEL_ANIMATION_TIMING = '275ms cubic-bezier(0.4,0.0,0.2,1)';
 
 @Directive({
   selector: '[collapse]'
@@ -50,14 +50,14 @@ export class Collapse implements OnChanges, DoCheck{
 					   console.log(this.el.nativeElement)
 					   this.originalHeight = this.el.nativeElement.clientHeight;
                   myAnimation = this._builder.build([
-                     style({ height:  '*', 'overflow' : 'hidden' }),
-                     animate(EXPANSION_PANEL_ANIMATION_TIMING, style({ height:  '0px' }))
+                     style({ height:  '*', 'overflow' : 'hidden', opacity : 1 }),
+                     animate(EXPANSION_PANEL_ANIMATION_TIMING, style({ height:  '0px', opacity : 0 }))
                   ]);
                }else{
 					   if(this.originalHeight) {
                      myAnimation = this._builder.build([
-                        style({'overflow': 'hidden'}),
-                        animate(EXPANSION_PANEL_ANIMATION_TIMING, style({height: this.originalHeight + "px"}))
+                        style({'overflow': 'hidden', opacity : 0}),
+                        animate(EXPANSION_PANEL_ANIMATION_TIMING, style({height: this.originalHeight + "px", opacity : 1}))
                      ]);
                   }
                }

@@ -4,6 +4,8 @@
 import { Injectable } from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import {HTTPMethod} from "../enum/enums";
+import {IService} from "./IService";
 
 @Injectable()
 export class ServiceImpl implements IService
@@ -30,8 +32,8 @@ export class ServiceImpl implements IService
               break;
           }
           internalPromise.then(
-            res => resolve(),
-            rej => reject()
+            res => resolve(res),
+            rej => reject(rej)
           )
       });
       return promise;

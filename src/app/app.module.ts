@@ -27,14 +27,19 @@ import {AuthModel} from "./model/AuthModel";
 import {EventHubService} from "./manager/eventHub/event-hub.service";
 import {BookModel} from "./model/BookModel";
 import { Collapse } from './directive/animation-directives.directive';
+import { ProfileEditorComponent } from './component/profile-editor/profile-editor.component';
+import { GiphySearcherComponent } from './component/giphy-searcher/giphy-searcher.component';
+import {GiphyModel} from "./model/GiphyModel";
 
 console.log(AuthModel);
 
 @NgModule({
   declarations: [
-				LoginComponent,
-    AppComponent,
-				Collapse
+      LoginComponent,
+      AppComponent,
+      Collapse,
+      ProfileEditorComponent,
+      GiphySearcherComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +49,9 @@ console.log(AuthModel);
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-			 FlexLayoutModule
+     FlexLayoutModule
   ],
-  providers: [Services, AuthModel, EventHubService, BookModel],
+  providers: [Services, AuthModel, EventHubService, BookModel, GiphyModel],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
